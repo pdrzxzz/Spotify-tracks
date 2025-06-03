@@ -46,31 +46,32 @@ Treinar, otimizar e avaliar os modelos **K-NN**, **LVQ** e **SVM** usando o data
 ### 2.1. K-Nearest Neighbors (K-NN)
 
 - **Hiperparâmetros testados**:
-  - `n_neighbors = [3, 5, 7, 9]`
+  - `n_neighbors = [1, 3, 7, 13, 21, 30]`
   - `weights = ['uniform', 'distance']`
+  - `metric = ['euclidean', 'manhattan', 'minkowski']`
 
 - **Melhor configuração**:
-  - `n_neighbors = 5`
+  - `n_neighbors = 30`
   - `weights = 'distance'`
+  - `metric = 'manhattan'`
 
 ### 2.2. Learning Vector Quantization (LVQ)
 
 - Implementação manual via **Programação Orientada a Objetos**.
 - **Hiperparâmetros testados**:
-  - `n_prototypes = [5, 10, 20]`
-  - `learning_rate = [0.01, 0.05, 0.1]`
-  - `n_epochs = 20`
+  - `n_prototypes = [1, 2]`
+  - `initial_lr = [10, 1, 0.1]`
 
 - **Melhor configuração**:
-  - `n_prototypes = 10`
-  - `learning_rate = 0.05`
+  - `n_prototypes = 1`
+  - `initial_lr = 0.1`
 
 ### 2.3. Support Vector Machine (SVM)
 
 - **Hiperparâmetros testados**:
   - `C = [0.1, 1, 10]`
   - `kernel = ['linear', 'rbf']`
-  - `gamma = ['scale', 'auto']`
+  - `gamma = ['scale']`
 
 - **Melhor configuração**:
   - `C = 1`
