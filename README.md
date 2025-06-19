@@ -92,3 +92,5 @@ For **music genre classification** in the **Spotify Track Genre** dataset:
 - **LVQ** remains useful for **educational purposes** or prototype analysis.  
 
 ---  
+
+Made by [pdrzxzz](https://github.com/pdrzxzz) | Computer Science Student 🎓
