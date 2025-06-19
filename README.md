@@ -1,4 +1,4 @@
-# Report: Hyperparameter Optimization and Model Comparison - Spotify Tracks 🎵📊  
+# Hyperparameter Optimization and Model Comparison - Spotify Tracks 🎵📊  
 
 **Professor:** Leandro Maciel Almeida  
 **Student:** Emanuel Pedroza  
