@@ -1,104 +1,94 @@
-# Relatório: Otimização de Hiperparâmetros e Comparação de Modelos - Spotify Tracks
+# Report: Hyperparameter Optimization and Model Comparison - Spotify Tracks 🎵📊  
 
 **Professor:** Leandro Maciel Almeida  
-**Aluno:** Emanuel Salgado Pedroza  
+**Student:** Emanuel Pedroza  
 
----
+---  
 
-## Objetivo
+## Objective 🎯  
 
-Treinar, otimizar e avaliar os modelos **K-NN**, **LVQ** e **SVM** usando o dataset **Spotify Tracks**, compreendendo o impacto da escolha de hiperparâmetros no desempenho e comparando os modelos para determinar o mais eficiente.
+Train, optimize, and evaluate **K-NN**, **LVQ**, and **SVM** models using the **Spotify Tracks** dataset, analyzing the impact of hyperparameter selection on performance and comparing models to determine the most efficient one.  
 
----
+---  
 
-## 1. Tratamento dos Dados
+## 1. Data Preprocessing 🛠️  
 
-### 1.1. Carregamento
+### 1.1. Loading  
+- Dataset imported from HuggingFace: `spotify-tracks-dataset`.  
 
-- Dataset importado da HuggingFace: `spotify-tracks-dataset`.
+### 1.2. Cleaning  
+- Removed columns: `Unnamed: 0`, `track_id`, `artists`, `album_name`, `track_name`.  
 
-### 1.2. Limpeza
+### 1.3. Missing Values  
+- The dataset **contains no missing values**. ✅  
 
-- Colunas removidas: `Unnamed: 0`, `track_id`, `artists`, `album_name`, `track_name`.
+### 1.4. Categorical Encoding  
+- Categorical variables encoded using `LabelEncoder`.  
 
-### 1.3. Valores Ausentes
+### 1.5. Data Splitting  
+- Numerical features standardized with `StandardScaler` (Z-score), ensuring no **data leakage** between train/validation/test sets.  
 
-- O dataset **não apresenta valores ausentes**.
+### 1.6. Normalization  
+- **Train**: 70%  
+- **Validation**: 15%  
+- **Test**: 15%  
 
-### 1.4. Codificação de Variáveis Categóricas
+---  
 
-- Todas as variáveis categóricas foram codificadas usando `LabelEncoder`.
+## 2. Hyperparameter Tuning (Grid Search) ⚙️  
 
-### 1.5. Divisão dos Dados
+### 2.1. K-Nearest Neighbors (K-NN)  
+- **Tested Hyperparameters**:  
+  - `n_neighbors = [1, 3, 7, 13, 21, 30]`  
+  - `weights = ['uniform', 'distance']`  
+  - `metric = ['euclidean', 'manhattan', 'minkowski']`  
 
-- Atributos numéricos foram padronizados com `StandardScaler` (Z-score), respeitando a separação de treino, validação e teste para evitar **data leakage**.
+- **Best Configuration**:  
+  - `n_neighbors = 30`  
+  - `weights = 'distance'`  
+  - `metric = 'manhattan'`  
 
-### 1.6. Normalização
+### 2.2. Learning Vector Quantization (LVQ)  
+- Implemented manually via **Object-Oriented Programming**.  
+- **Tested Hyperparameters**:  
+  - `n_prototypes = [1, 2]`  
+  - `initial_lr = [10, 1, 0.1]`  
 
-- Treino: **70%**  
-- Validação: **15%**  
-- Teste: **15%**
+- **Best Configuration**:  
+  - `n_prototypes = 1`  
+  - `initial_lr = 0.1`  
 
----
+### 2.3. Support Vector Machine (SVM)  
+- **Tested Hyperparameters**:  
+  - `C = [0.1, 1, 10]`  
+  - `kernel = ['linear', 'rbf']`  
+  - `gamma = ['scale']`  
 
-## 2. Busca por Hiperparâmetros (Grid Search)
+- **Best Configuration**:  
+  - `C = 1`  
+  - `kernel = 'rbf'`  
+  - `gamma = 'scale'`  
 
-### 2.1. K-Nearest Neighbors (K-NN)
+---  
 
-- **Hiperparâmetros testados**:
-  - `n_neighbors = [1, 3, 7, 13, 21, 30]`
-  - `weights = ['uniform', 'distance']`
-  - `metric = ['euclidean', 'manhattan', 'minkowski']`
+## 3. Model Evaluation & Comparison 📈  
 
-- **Melhor configuração**:
-  - `n_neighbors = 30`
-  - `weights = 'distance'`
-  - `metric = 'manhattan'`
+> Full metrics (including confusion matrices) generated using `classification_report` and `confusion_matrix`.  
 
-### 2.2. Learning Vector Quantization (LVQ)
+---  
 
-- Implementação manual via **Programação Orientada a Objetos**.
-- **Hiperparâmetros testados**:
-  - `n_prototypes = [1, 2]`
-  - `initial_lr = [10, 1, 0.1]`
+## 4. Key Findings & Conclusions 🏆  
 
-- **Melhor configuração**:
-  - `n_prototypes = 1`
-  - `initial_lr = 0.1`
+- **SVM** achieved the **highest overall performance** (accuracy & F1-score), excelling in **multi-class classification**.  
+- **K-NN** showed **moderate performance** with **low computational complexity**, making it a simple yet effective choice.  
+- **LVQ**, despite its educational value, underperformed compared to SVM/K-NN but provided insights into prototype-based learning.  
+- Hyperparameter tuning **significantly impacted results**, reinforcing the need for **cross-validation**.  
 
-### 2.3. Support Vector Machine (SVM)
+### Final Recommendations 🚀  
 
-- **Hiperparâmetros testados**:
-  - `C = [0.1, 1, 10]`
-  - `kernel = ['linear', 'rbf']`
-  - `gamma = ['scale']`
+For **music genre classification** in the **Spotify Track Genre** dataset:  
+- **SVM** is the **top choice** for high accuracy and robustness.  
+- **K-NN** is ideal for **lightweight, interpretable** solutions.  
+- **LVQ** remains useful for **educational purposes** or prototype analysis.  
 
-- **Melhor configuração**:
-  - `C = 1`
-  - `kernel = 'rbf'`
-  - `gamma = 'scale'`
-
----
-
-## 3. Avaliação e Comparação dos Modelos
-
-> As métricas completas (incluindo matriz de confusão) foram geradas com `classification_report` e `confusion_matrix`.
-
----
-
-## 4. Conclusões
-
-- **SVM** apresentou o **melhor desempenho geral**, especialmente na **acurácia** e **F1-score**, sendo mais robusto para classificação multiclasse.
-- O **K-NN** teve desempenho intermediário, com bons resultados e **baixa complexidade computacional**.
-- O **LVQ**, apesar da implementação manual, teve **valor didático** e desempenho competitivo, mas inferior aos outros modelos.
-- A escolha dos hiperparâmetros teve **impacto claro na performance**, reforçando a importância da **validação cruzada**.
-
-### Considerações Finais
-
-No contexto da classificação de gêneros musicais com base nos atributos numéricos do dataset **Spotify Track Genre**:
-
-- **SVM** se destacou como o modelo mais eficaz, especialmente em cenários com múltiplas classes e dados padronizados.
-- **K-NN** mostrou-se uma opção viável quando se busca simplicidade e interpretabilidade.
-- **LVQ**, embora com menor desempenho global, pode ser útil em contextos com distribuição clara de classes e quando se deseja controle direto sobre protótipos.
-
-Para aplicações práticas como **recomendação, categorização** ou **análise musical**, o **SVM** é o mais indicado, enquanto o **K-NN** é uma alternativa leve e o **LVQ** serve como ferramenta exploratória ou educacional.
+---  
